@@ -30,6 +30,7 @@ public class Traverse {
     v67.neighbors = new ArrayList<>(List.of(v91));
 
     printVertices(v7);
+    System.out.println(sum(v7));
   }
 
   public static void printVertices(Vertex<?> current) {
@@ -55,6 +56,28 @@ public class Traverse {
       for (Vertex<?> neighbor : current.neighbors) {
         printVertices(neighbor, visited);
       }
+  }
+
+  public static int sum(Vertex<Integer> current) {
+    // create Set of visited nodes
+    Set<Vertex<Integer>> visited = new HashSet<>();
+    // helper + output
+    return sum(current, visited);
+  }
+
+  private static int sum(Vertex<Integer> current, Set<Vertex<Integer>> visited) {
+    // if visited or null
+    if (current == null || visited.contains(current)) return 0;
+    // add vertex to visited
+    visited.add(current);
+    // create total to keep track
+    int total = current.data;
+    // recurse through neighbors
+    for (var neighbor : current.neighbors) {
+      total += sum(neighbor, visited);
+    }
+    // output
+    return total;
   }
 
 }

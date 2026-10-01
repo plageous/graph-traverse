@@ -28,6 +28,33 @@ public class Traverse {
     v45.neighbors = new ArrayList<>(List.of(v23));
     v23.neighbors = new ArrayList<>(List.of());
     v67.neighbors = new ArrayList<>(List.of(v91));
+
+    printVertices(v7);
+  }
+
+  public static void printVertices(Vertex<?> current) {
+    // create Set of visited nodes
+    Set<Vertex<?>> visited = new HashSet<>();
+    visited.add(current);
+    // output
+    System.out.println(current.data);
+    // helper
+    for (Vertex<?> neighbor : current.neighbors) {
+        printVertices(neighbor, visited);
+      }
+  }
+
+  private static void printVertices(Vertex<?> current, Set<Vertex<?>> visited) {
+      if (current == null) return;
+      // stop if already visited
+      if (visited.contains(current)) return;
+      visited.add(current);
+      // output
+      System.out.println(current.data);
+      // recurse
+      for (Vertex<?> neighbor : current.neighbors) {
+        printVertices(neighbor, visited);
+      }
   }
 
 }
